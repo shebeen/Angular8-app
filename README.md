@@ -1,2 +1,2 @@
-# Extra-client1
+# Extra-client-angular
 Angular front-end application for Extra app.
