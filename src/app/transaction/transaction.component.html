@@ -1,0 +1,58 @@
+ <!-- Table to list transactions -->
+<mat-card class="transaction-input-card">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Time Column -->
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef> Time </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.date}} </mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.description}} </mat-cell>
+    </ng-container>
+
+    <!-- Amount Column -->
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.amount}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="deleteButton">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> 
+        <button mat-stroked-button color="primary" (click)=deleteTransaction(transaction.id) class="margin-left-10">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <!-- Input Form -->
+</mat-card>
+<mat-card class="transaction-input-card">
+  <form [formGroup]="transactionForm" (ngSubmit)="saveTransaction()">
+    <mat-form-field>
+      <input matInput formControlName = "description" placeholder="Description">
+    </mat-form-field>
+    <mat-form-field class="margin-left-10">
+      <mat-label>Select a type</mat-label>
+      <mat-select formControlName = "type">
+        <mat-option *ngFor="let type of transactionTypes" [value]="type.id">
+          {{type.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="margin-left-10">
+      <input matInput placeholder="Amount" formControlName = "amount">
+    </mat-form-field>
+    <button mat-stroked-button type="submit" color="primary" class="margin-left-10">
+      <mat-icon>done</mat-icon>
+    </button>
+  </form>
+</mat-card>

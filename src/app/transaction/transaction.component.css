@@ -1,0 +1,11 @@
+table {
+    width: 100%;
+  }
+.margin-left-10{
+  margin-left: 10px;
+}
+.transaction-input-card {
+    max-width: 50%;
+    margin: 4px
+}
+  
